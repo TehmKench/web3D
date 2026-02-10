@@ -1,0 +1,219 @@
+<html>  <!-- Cristian.R  -->
+<head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        <a-assets>
+            <!-- imagenes 360 -->
+            <img id="ipresentacio" src="Assets/imagenes/imatge0.jpg">
+
+            <!-- Fondos i interfície -->
+            <img id="fondo1" src="Assets/imagenes/1.jpg">
+            <img id="fondo2" src="Assets/imagenes/2.jpg">
+            <img id="fondo3" src="Assets/imagenes/3.jpg">
+            <img id="fondo4" src="Assets/imagenes/4.jpg">
+            <img id="fondo5" src="Assets/imagenes/5.jpg">
+            <img id="fondo6" src="Assets/imagenes/6.jpg">
+            <img id="fondo7" src="Assets/imagenes/7.jpg">
+            <img id="fondo8" src="Assets/imagenes/8.jpg">
+            <img id="fondo9" src="Assets/imagenes/9.jpg">
+            <img id="fondo_blancoYnegro" src="Assets/imagenes/fondo_blancoYnegro2.jpg">
+            <img id="fondo0" src="Assets/imagenes/10.jpg">
+
+            <!--imatge del plano-->
+            <img id="dibuplano" src="Assets/imagenes/plano.jpg">
+
+            <!--imagenes de banderes-->
+            <img id="bes" src="Assets/imagenes/bes.png">
+            <img id="bcat" src="Assets/imagenes/bcat.png">
+            <img id="buk" src="Assets/imagenes/buk.png">
+
+            <!-- Icono de casa (asegúrate de tener esta imagen) -->
+            <img id="casa" src="Assets/imagenes/casa.jpg">
+
+            <!-- Audio intros (preload) -->
+            <audio id="Intro-cat" src="Assets/audios/cat/Intro.mp3"></audio>
+            <audio id="Intro-es" src="Assets/audios/es/Intro.mp3"></audio>
+            <audio id="Intro-uk" src="Assets/audios/en/Intro.mp3"></audio>
+        </a-assets>
+
+        <a-entity camera look-controls wasd-controls="false"></a-entity>
+
+        <!-- Entorn 360 inicial (menu d'idiomes) -->
+        <a-sky id="sky" src="#fondo_blancoYnegro"></a-sky>
+        
+        <!-- Banderes -->
+        <a-plane id="es" data-fondo="Intro" position="-1.5 -0.5 -2" src="#bes" scale="1 1 1" botocastella></a-plane>
+        <a-plane id="cat" position="0 -0.5 -2" src="#bcat" scale="1 1 1" botocatala></a-plane>
+        <a-plane id="uk" position="1.5 -0.5 -2" src="#buk" scale="1 1 1" botoangles></a-plane>
+
+            <!-- Plano -->
+            <a-plane id="plano" position="0 -1 -2" src="#dibuplano" scale="2 1 2" visible="false"></a-plane>
+
+            <!-- Esferes interactivas: cada una muestra un fondo diferente -->
+            <a-sphere id="esfera1" position="-0.75 -0.75 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo1" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera2" position="-0.85 -0.85 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo2" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera3" position="-0.78 -1 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo3" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera4" position="0.1 -1.3 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo4" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera5" position="-0.4 -1.15 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo5" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera6" position="0.37 -1.11 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo6" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera7" position="-0.23 -0.7 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo7" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera8" position="0.35 -0.70 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo8" mostrar-fondo></a-sphere>
+            <a-sphere id="esfera9" position="0.1 -0.65 -2" radius="0.03" color="red" visible="false"
+                animation="property: scale; dur: 1000; to: 1.2 1.2 1.2; dir: alternate; loop: true"
+                data-fondo="fondo9" mostrar-fondo></a-sphere>
+
+            <!-- Botó per tornar al menú d'idiomes -->
+            <a-plane id="casa" position="2.3 -0.9 -1.8" src="#casa" scale="0.4 0.4 0.4" visible="true" backtomenu></a-plane>
+
+            <!-- Element de so -->
+            <a-entity id="sound" sound></a-entity>
+        </a-scene>
+
+        <script>
+            const sky = document.querySelector('#sky');
+            const sound = document.querySelector('#sound');
+            let idioma = "cat";
+            const banderaEs = document.querySelector('#es');
+            const banderaCat = document.querySelector('#cat');
+            const banderaUk = document.querySelector('#uk');
+            const mapa = document.querySelector('#plano');
+            const casaBtn = document.querySelector('#casa');
+
+        // Desactiva moviment amb tecles
+        document.querySelector("[camera]").removeAttribute("wasd-controls");
+
+        // Funció per reproduir àudio
+        function playAudio(nomFitxer) {
+            const assetId = `${nomFitxer}-${idioma}`;
+            const assetEl = document.getElementById(assetId);
+            try {
+                if (sound.components.sound && sound.components.sound.isPlaying) {
+                    sound.components.sound.stopSound();
+                }
+            } catch (e) { }
+
+            if (assetEl) {
+                sound.setAttribute('sound', `src: #${assetId}`);
+                setTimeout(() => {
+                    if (sound.components.sound) sound.components.sound.playSound();
+                }, 50);
+                return;
+            }
+
+            const ruta = `Assets/audios/${idioma}/Intro.mp3`;
+            sound.setAttribute('sound', `src: url(${ruta})`);
+            setTimeout(() => {
+                if (sound.components.sound) {
+                    sound.components.sound.playSound();
+                }
+            }, 50);
+        }
+
+        // Component per a cada esfera: mostra el fons corresponent
+        AFRAME.registerComponent('mostrar-fondo', {
+            init: function () {
+                this.el.addEventListener('click', () => {
+                    const fondoId = this.el.getAttribute('data-fondo');
+                    if (fondoId) {
+                        sky.setAttribute('src', '#' + fondoId);
+                        playAudio(fondoId);
+                    }
+                });
+            }
+        });
+
+        // Components per a les banderes
+        AFRAME.registerComponent("botoangles", {
+            init: function () {
+                this.el.addEventListener("click", () => {
+                    sky.setAttribute('src', '#i00');
+                    [banderaEs, banderaCat, banderaUk].forEach(el => el.setAttribute('visible', false));
+                    for (let i = 1; i <= 9; i++) {
+                        const esf = document.querySelector(`#esfera${i}`);
+                        if (esf) esf.setAttribute('visible', true);
+                    }
+                    sky.setAttribute('src', '#' + 'fondo10');
+                    mapa.setAttribute('visible', true);
+                    casaBtn.setAttribute('visible', true);
+                    idioma = "uk";
+                    playAudio("Intro");
+                });
+            }
+        });
+
+        AFRAME.registerComponent("botocatala", {
+            init: function () {
+                this.el.addEventListener("click", () => {
+                    sky.setAttribute('src', '#i00');
+                    [banderaEs, banderaCat, banderaUk].forEach(el => el.setAttribute('visible', false));
+                    for (let i = 1; i <= 9; i++) {
+                        const esf = document.querySelector(`#esfera${i}`);
+                        if (esf) esf.setAttribute('visible', true);
+                    }
+                    sky.setAttribute('src', '#' + 'fondo0');
+                    mapa.setAttribute('visible', true);
+                    casaBtn.setAttribute('visible', true);
+                    idioma = "cat";
+                    playAudio("Intro");
+                });
+            }
+        });
+
+        AFRAME.registerComponent("botocastella", {
+            init: function () {
+                this.el.addEventListener("click", () => {
+                    sky.setAttribute('src', '#i00');
+                    [banderaEs, banderaCat, banderaUk].forEach(el => el.setAttribute('visible', false));
+                    for (let i = 1; i <= 9; i++) {
+                        const esf = document.querySelector(`#esfera${i}`);
+                        if (esf) esf.setAttribute('visible', true);
+                    }
+                    sky.setAttribute('src', '#' + 'fondo0');
+                    mapa.setAttribute('visible', true);
+                    casaBtn.setAttribute('visible', true);
+                    idioma = "es";
+                    playAudio("Intro");
+                });
+            }
+        });
+
+        // Tornar al menú principal
+        AFRAME.registerComponent('backtomenu', {
+            init: function () {
+                this.el.addEventListener('click', () => {
+                    sky.setAttribute('src', '#fondo_blancoYnegro');
+                    [banderaEs, banderaCat, banderaUk].forEach(el => el.setAttribute('visible', true));
+                    for (let i = 1; i <= 9; i++) {
+                        const esf = document.querySelector(`#esfera${i}`);
+                        if (esf) esf.setAttribute('visible', false);
+                    }
+                    sky.setAttribute('src', '#' + 'fondo_blancoYnegro');
+                    mapa.setAttribute('visible', false);
+                    casaBtn.setAttribute('visible', false);
+                    if (sound.components.sound && sound.components.sound.isPlaying) {
+                        sound.components.sound.stopSound();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
